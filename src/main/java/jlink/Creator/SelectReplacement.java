@@ -76,8 +76,6 @@ public class SelectReplacement extends HttpServlet {
             }
             
             request.getSession().setAttribute("link_image", link_image);
-            // getServletContext().setAttribute("link_image", link_image);
-
 
             try (PrintWriter out = response.getWriter()) {
                 if(replacement.equals("roi")){

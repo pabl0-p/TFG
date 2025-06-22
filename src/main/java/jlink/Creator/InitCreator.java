@@ -54,12 +54,6 @@ public class InitCreator extends HttpServlet {
             file_description = (String) request.getSession().getAttribute("file_description");
             storage_date = (String) request.getSession().getAttribute("storage_date");
 
-        //     image = (JLINKImage) getServletContext().getAttribute("image");
-        //     file_name = (String) getServletContext().getAttribute("file_name");
-        //     file_title = (String) getServletContext().getAttribute("file_title");
-        //     file_description = (String) getServletContext().getAttribute("file_description");
-        //     storage_date = (String) getServletContext().getAttribute("storage_date");
-
             appPath = request.getServletContext().getRealPath("");
             filePart = request.getPart("image");
             AppUtilsCreator.setProtection(image, filePart, appPath, request);

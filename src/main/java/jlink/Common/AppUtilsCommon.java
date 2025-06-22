@@ -121,52 +121,7 @@ public class AppUtilsCommon {
         return secretKey;
     }
 
-    // public static void getMetadata(byte[] data, JLINKImage image) {
-
-    //     String metadata, value, start_template;
-
-    //     metadata = new String(data, StandardCharsets.UTF_8);
-    //     start_template = MetaConst.METADATA_START;
-
-    //     image.setVersion(StringUtils.substringsBetween(metadata, String.format(start_template, MetaConst.VERSION_METADATA), MetaConst.METADATA_END)[0]);
-
-    //     image.setTitle(StringUtils.substringsBetween(metadata,  String.format(start_template, MetaConst.TITLE_METADATA), MetaConst.METADATA_END)[0]);
-
-    //     image.setNote(StringUtils.substringsBetween(metadata,  String.format(start_template, MetaConst.NOTE_METADATA), MetaConst.METADATA_END)[0]);
-
-    //     image.setImage_format(StringUtils.substringsBetween(metadata,  String.format(start_template, MetaConst.FORMAT_METADATA), MetaConst.METADATA_END)[0]);
-
-    //     value = StringUtils.substringsBetween(metadata,  String.format(start_template, MetaConst.HREF_METADATA), MetaConst.METADATA_END)[0];
-    //     value = JLINKConst.IMAGE_LABEL + value.replaceAll("[^0-9]", "");
-    //     image.setImage_Href(value);
-
-    //     value = StringUtils.substringsBetween(metadata,  String.format(start_template, MetaConst.LINK_X_METADATA), MetaConst.METADATA_END)[0];
-    //     image.setLink_region_X(value);
-
-    //     image.setLink_region_Y(StringUtils.substringsBetween(metadata,  String.format(start_template, MetaConst.LINK_Y_METADATA), MetaConst.METADATA_END)[0]);
-        
-    //     String[] duration = StringUtils.substringsBetween(metadata,  String.format(start_template, MetaConst.DURATION_METADATA), MetaConst.METADATA_END);
-    //     if (duration != null && duration.length > 0) {
-    //         image.setLink_duration(duration[0]);
-    //     }
-
-    //     String[] vpid = StringUtils.substringsBetween(metadata,  String.format(start_template, MetaConst.VPID_METADATA), MetaConst.METADATA_END);
-    //     if(vpid != null && vpid.length > 0) {
-    //         image.setLink_Vpid(Integer.parseInt(vpid[0]));
-    //     }
-
-    //     String[] values = StringUtils.substringsBetween(metadata,  String.format(start_template, MetaConst.SPRITE_METADATA), MetaConst.METADATA_END);
-    //     if (values != null && values.length > 0) {
-    //         image.setLink_sprite(JLINKConst.SPRITE_LABEL + values[0].replaceAll("[^0-9]", ""));
-    //     }
-        
-    //     values = StringUtils.substringsBetween(metadata,  String.format(start_template, MetaConst.TO_METADATA), MetaConst.METADATA_END);
-    //     if (values != null && values.length > 0) {
-    //         image.setLink_to(JLINKConst.SCENE_LABEL + value.replaceAll("[^0-9]", ""));
-    //     }
-    // }
-
-        public void getImageFromXmlBox(JumbfBox xmlJumbfBox, JLINKImage img) throws Exception{
+    public void getImageFromXmlBox(JumbfBox xmlJumbfBox, JLINKImage img) throws Exception{
         ApplicationContext context = null;
         JlinkElement element = null;
         try{
@@ -362,6 +317,8 @@ public class AppUtilsCommon {
             String request = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
             request = request.replace("{{USERNAME}}", this.user).replace("{{ROLE}}", this.role).replace("{{ACTION}}", action);
             PDP pdp = new PDP();
+            System.out.println(policy);
+            System.out.println(request);
             String effect = pdp.decide(policy, request);
             if(effect.equals("Permit")){
                 access = true;

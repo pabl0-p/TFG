@@ -556,7 +556,7 @@ public class AppUtilsModifier {
 
         image_fileName = image.getAppPath() + File.separator + AppConst.MODIFIER_DIR + File.separator
                 + image.getTitle()+ ".jpeg";
-        if(image.getReplacement().equals("replace_img")) {
+        if(image.getReplacement() != null && image.getReplacement().equals("replace_img")) {
             image_fileName = image.getAppPath() + File.separator + AppConst.MODIFIER_DIR + File.separator
                 + image.getTitle() + "_replacement.jpeg";
         } else if (image.getEncryption() != null){

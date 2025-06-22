@@ -101,8 +101,6 @@ public class Uploader extends HttpServlet {
             utils = new AppUtilsUploader();
             String user = (String) request.getSession().getAttribute("username");
             String role = (String) request.getSession().getAttribute("role");
-            // String user = (String) getServletContext().getAttribute("username");
-            // String role = (String) getServletContext().getAttribute("role");
             utils.setJLINKImage(image, file_name, user, role);
 
             filePart = request.getPart("image");

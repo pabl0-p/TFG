@@ -92,15 +92,7 @@ public class AddReplacement extends HttpServlet {
             request.getSession().setAttribute("file_name", file_name);
             request.getSession().setAttribute("file_title", file_title);
             request.getSession().setAttribute("file_description", file_description);
-            request.getSession().setAttribute("storage_date", storage_date);
-
-            // getServletContext().setAttribute("image", image);
-            // getServletContext().setAttribute("file_name", file_name);
-            // getServletContext().setAttribute("file_title", file_title);
-            // getServletContext().setAttribute("file_description", file_description);
-            // getServletContext().setAttribute("storage_date", storage_date);
-            // getServletContext().removeAttribute("image_secretKey");
-     
+            request.getSession().setAttribute("storage_date", storage_date);     
 
             try (PrintWriter out = response.getWriter()) {
                 if(replacement.equals("roi")){

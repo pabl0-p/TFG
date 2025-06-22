@@ -48,7 +48,6 @@ public class SelectSprite extends HttpServlet {
 
         try {
             link_image = (JLINKImage) request.getSession().getAttribute("link_image");
-            //link_image = (JLINKImage) getServletContext().getAttribute("link_image");
             appPath = request.getServletContext().getRealPath("");
             if (link_image.getReplacement() != null) {
                 filePart = request.getPart("image");
@@ -56,7 +55,6 @@ public class SelectSprite extends HttpServlet {
             
             AppUtilsCreator.setProtection(link_image, filePart, appPath, request);
             file_name = (String) request.getSession().getAttribute("file_name");
-            //file_name = (String) getServletContext().getAttribute("file_name");
 
             try (PrintWriter out = response.getWriter()) {
                 out.println("<!DOCTYPE html>");

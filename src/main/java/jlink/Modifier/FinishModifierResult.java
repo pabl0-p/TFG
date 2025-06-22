@@ -55,21 +55,15 @@ public class FinishModifierResult extends HttpServlet {
 
         try {
             file_name = (String) request.getSession().getAttribute("file_name");
-            //file_name = (String) getServletContext().getAttribute("file_name");
             if (!file_name.equals("MODIFICATION IS DONE")) {
                 image = (JLINKImage) request.getSession().getAttribute("image");
-                //image = (JLINKImage) getServletContext().getAttribute("image");
                 utils = new AppUtilsModifier();
                 file_name = utils.updateFileName(file_name, image.getAppPath());
                 file_title = (String) request.getSession().getAttribute("file_title");
-                // file_title = (String) getServletContext().getAttribute("file_title");
                 file_description = (String) request.getSession().getAttribute("file_description");
-                //file_description = (String) getServletContext().getAttribute("file_description");
                 storage_date = (String) request.getSession().getAttribute("storage_date");
-                //storage_date = (String) getServletContext().getAttribute("storage_date");
                 startTime = System.nanoTime();
                 String user = (String) request.getSession().getAttribute("username");
-                // String user = (String) getServletContext().getAttribute("username");
 
                 utils.createFile(image, file_name, user);
                 endTime = System.nanoTime();
@@ -81,7 +75,6 @@ public class FinishModifierResult extends HttpServlet {
                 statement.executeUpdate();
 
                 request.getSession().setAttribute("file_name", "MODIFICATION IS DONE");
-                // getServletContext().setAttribute("file_name", "MODIFICATION IS DONE");
                 try (PrintWriter out = response.getWriter()) {
                     out.println("<!DOCTYPE html>");
                     out.println("<html>");

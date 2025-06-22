@@ -49,7 +49,6 @@ public class SelectSpriteModifier extends HttpServlet {
 
         try {
             link_image = (JLINKImage) request.getSession().getAttribute("link_image");
-            //link_image = (JLINKImage) getServletContext().getAttribute("link_image");
             appPath = request.getServletContext().getRealPath("");
             
             if (link_image.getReplacement() != null) {
@@ -61,7 +60,6 @@ public class SelectSpriteModifier extends HttpServlet {
             
             AppUtilsModifier.setProtection(link_image, filePart, appPath, request);
             file_name = (String) request.getSession().getAttribute("file_name");
-            //file_name = (String) getServletContext().getAttribute("file_name");
 
             try (PrintWriter out = response.getWriter()) {
                 out.println("<!DOCTYPE html>");

@@ -42,17 +42,11 @@ public class ActionModifier extends HttpServlet {
 
                 try {
                         image = (JLINKImage) request.getSession().getAttribute("image");
-                        // image = (JLINKImage) getServletContext().getAttribute("image");
                         utils = new AppUtilsModifier();
                         file_name = (String) request.getSession().getAttribute("file_name");
                         file_title = (String) request.getSession().getAttribute("file_title");
                         file_description = (String) request.getSession().getAttribute("file_description");
                         storage_date = (String) request.getSession().getAttribute("storage_date");
-
-                        // file_name = (String) getServletContext().getAttribute("file_name");
-                        // file_title = (String) getServletContext().getAttribute("file_title");
-                        // file_description = (String) getServletContext().getAttribute("file_description");
-                        // storage_date = (String) getServletContext().getAttribute("storage_date");
 
                         try (PrintWriter out = response.getWriter()) {
                                 out.println("<!DOCTYPE html>");

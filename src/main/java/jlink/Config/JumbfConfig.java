@@ -174,11 +174,6 @@ public class JumbfConfig {
         return new JlinkXmlValidator();
     }
 
-    // @Bean
-    // public ParamHandlerFactory paramHandlerFactory(){
-    //     return new ParamHandlerFactory();
-    // }
-
     @Bean
     public RoiParamHandler roiParamHandler(){
         return new RoiParamHandler();
@@ -189,7 +184,6 @@ public class JumbfConfig {
         return new FileParamHandler();
     }
 
-    //
     @Bean
     public ProtectionContentType protectionContentType() {
         return new ProtectionContentType();

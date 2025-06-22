@@ -51,25 +51,19 @@ public class FinishResult extends HttpServlet {
 
         try {
             file_name = (String) request.getSession().getAttribute("file_name");
-            //file_name = (String) getServletContext().getAttribute("file_name");
             image = (JLINKImage) request.getSession().getAttribute("image");
-            //image = (JLINKImage) getServletContext().getAttribute("image");
             System.out.print(image.getAppPath());
             f = new File(
                     image.getAppPath() + File.separator + AppConst.SAVE_DIR + File.separator + file_name + ".jpeg");
             if (!f.exists()) {
                 file_title = (String) request.getSession().getAttribute("file_title");
-                //file_title = (String) getServletContext().getAttribute("file_title");
                 file_description = (String) request.getSession().getAttribute("file_description");
-                //file_description = (String) getServletContext().getAttribute("file_description");
                 storage_date = (String) request.getSession().getAttribute("storage_date");
-                //storage_date = (String) getServletContext().getAttribute("storage_date");
                 
                 
                 utils = new AppUtilsCreator();
                 startTime = System.nanoTime();
                 String user = (String) request.getSession().getAttribute("username");
-                //String user = (String) getServletContext().getAttribute("username");
                 utils.createFile(image, file_name, user);
                 endTime = System.nanoTime();
                 duration = (endTime - startTime);

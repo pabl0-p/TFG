@@ -74,23 +74,6 @@ public class AppUtilsCreator {
     }
 
     public static void saveImage(String appPath, Part filePart, String image_title) throws Exception{
-        // int read;
-
-        // String saveDir = appPath + File.separator + AppConst.CREATOR_DIR;
-        // File fileSaveDir = new File(saveDir);
-        // if (!fileSaveDir.exists()) {
-        //     fileSaveDir.mkdir();
-        // }
-        // String savePath = saveDir + File.separator + image_title.replace(" ", "_") + ".jpeg";
-
-        // try (OutputStream outStream = new FileOutputStream(new File(savePath));
-        //     InputStream filecontent = filePart.getInputStream()) {
-        //     byte[] bytes = new byte[1024];
-        //     while ((read = filecontent.read(bytes)) != -1) {
-        //         outStream.write(bytes, 0, read);
-        //     }
-        // }
-
 
         String saveDir = appPath + File.separator + AppConst.CREATOR_DIR;
         String savePath = saveDir + File.separator + image_title.replace(" ", "_") + ".jpeg";
@@ -118,33 +101,7 @@ public class AppUtilsCreator {
         image.setIVSpec(ivSpec);
     }
 
-    // public static void encryptPart(String encryption, SecretKeySpec secretKey,  IvParameterSpec ivSpec, String appPath, Part filePart, String image_title) throws Exception{
-
-    //     int read;
-
-    //     String savePath = appPath + File.separator + AppConst.CREATOR_DIR + File.separator + image_title.replace(" ", "_") + ".imgenc";
-    //     Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-
-    //     if(encryption.equals("AES 256 with IV")){
-            
-    //     }
-
-    //     cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivSpec);
-
-    //     try (OutputStream outStream = new FileOutputStream(savePath);
-    //          CipherOutputStream c = new CipherOutputStream(outStream, cipher);
-    //          InputStream filecontent = filePart.getInputStream()) {
-    //             byte [] bytes = new byte[1024];
-    //             while((read = filecontent.read(bytes)) != -1) {
-    //                 c.write(bytes, 0, read);
-    //             }
-    //          }
-        
-        
-    // }
-
     public static void encryptBuffImage(String encryption, SecretKeySpec secretKey, IvParameterSpec ivSpec, BufferedImage image, String savePath) throws Exception{
-        // String savePath = appPath + File.separator + AppConst.CREATOR_DIR + File.separator + image_title.replace(" ", "_") + ".imgenc";
 
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         ImageIO.write(image, "jpeg", bytes);
@@ -288,16 +245,6 @@ public class AppUtilsCreator {
         }
     }
 
-    // public void setImagesSpecs(JLINKImage image, SecretKeySpec secretKey, IvParameterSpec iv) {
-    //     for (JLINKImage aux : image.getLinked_images()) {
-    //             if (aux.getEncryption() != null) {
-    //                 aux.setSecretKey(secretKey);
-    //                 aux.setIVSpec(iv);
-    //             }
-    //             setImagesSpecs(image, secretKey, iv);
-    //         }
-    // }
-
     public void builder(JLINKImage image, boolean mainBox, BuilderWeb builder_file, String user) throws Exception {
 
         int JUMBF_box_id;
@@ -387,29 +334,4 @@ public class AppUtilsCreator {
 
         return merge_fileName;
     }
-
-    // public void saveKey(String path, JLINKImage image) throws Exception {
-    //     String hash = AppUtilsCommon.getFileHash(path);
-
-    //     String sql = "INSERT INTO KEYS (id, secret_key) VALUES (?, ?)";
-
-    //     Object[] master = AppUtilsCommon.getMasterSpecs();
-    //     SecretKeySpec key = image.getSecretKey();
-
-    //     Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-    //     cipher.init(Cipher.ENCRYPT_MODE, (SecretKeySpec) master[0], (IvParameterSpec) master[1]);
-    //     byte[] data = cipher.doFinal(key.getEncoded());
-
-    //     String dbName = System.getenv("POSTGRES_DB");
-    //     String user = System.getenv("POSTGRES_USER");
-    //     String password = System.getenv("POSTGRES_PASSWORD");
-        
-    //     String db_url = String.format(AppConst.DATABASE_CONNECTION, dbName, user, password);
-    //     Class.forName("org.postgresql.Driver");
-    //     Connection connection = DriverManager.getConnection(db_url);
-    //     PreparedStatement statement = connection.prepareStatement(sql);
-    //     statement.setString(1, hash);
-    //     statement.setBytes(2, data);
-    //     statement.executeUpdate();
-    // }
 }

@@ -44,9 +44,7 @@ public class FinishCreator extends HttpServlet {
 
         try {
             image = (JLINKImage) request.getSession().getAttribute("image");
-            //image = (JLINKImage) getServletContext().getAttribute("image");
             link_image = (JLINKImage) request.getSession().getAttribute("link_image");
-            //link_image = (JLINKImage) getServletContext().getAttribute("link_image");
 
             sprite_x = request.getParameter("sprite_x");
             sprite_y = request.getParameter("sprite_y");

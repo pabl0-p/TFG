@@ -88,8 +88,6 @@ public class InitModifier extends HttpServlet {
             request.getSession().setAttribute("storage_date", storage_date);
             request.getSession().setAttribute("label", label);
 
-            // AQUI
-
             try (PrintWriter out = response.getWriter()) {
                 out.println("<!DOCTYPE html>");
                 out.println("<html>");

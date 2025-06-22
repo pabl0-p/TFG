@@ -59,15 +59,12 @@ public class SelectReplacementModifier extends HttpServlet {
             link_image.setTitle(request.getParameter("title"));
             link_image.setNote(request.getParameter("description"));
             label = (int) request.getSession().getAttribute("label");
-            //label = (int) getServletContext().getAttribute("label");
             label++;
             link_image.setLabel(JLINKConst.IMAGE_LABEL + label);
             link_image.setPossibleAction(true);
 
             request.getSession().setAttribute("label", label);
             request.getSession().setAttribute("link_image", link_image);
-            //getServletContext().setAttribute("label", label);
-            //getServletContext().setAttribute("link_image", link_image);
 
             appPath = request.getServletContext().getRealPath("");
             link_image.setAppPath(appPath);

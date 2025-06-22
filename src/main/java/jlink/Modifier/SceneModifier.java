@@ -44,7 +44,6 @@ public class SceneModifier extends HttpServlet {
         try {
             scene = request.getParameter("scene");
             image = (JLINKImage) request.getSession().getAttribute("image");
-            //image = (JLINKImage) getServletContext().getAttribute("image");
 
             utils = new AppUtilsModifier();
             utils.getSceneByLabel(image, scene);

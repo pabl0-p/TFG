@@ -41,12 +41,10 @@ public class DeleteLink extends HttpServlet {
 
         try {
             image = (JLINKImage) request.getSession().getAttribute("image");
-            //image = (JLINKImage) getServletContext().getAttribute("image");
             deleted_image = request.getParameter("deleted_image");
             utils = new AppUtilsModifier();
             utils.deleteLINK(image, deleted_image);
             request.getSession().setAttribute("image", image);
-            //getServletContext().setAttribute("image", image);
 
             try (PrintWriter out = response.getWriter()) {
                 out.println("<!DOCTYPE html>");

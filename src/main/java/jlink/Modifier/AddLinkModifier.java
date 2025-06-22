@@ -43,8 +43,6 @@ public class AddLinkModifier extends HttpServlet {
         try {
             image = (JLINKImage) request.getSession().getAttribute("image");
             link_image = (JLINKImage) request.getSession().getAttribute("link_image");
-            //image = (JLINKImage) getServletContext().getAttribute("image");
-            //link_image = (JLINKImage) getServletContext().getAttribute("link_image");
             sprite_x = request.getParameter("sprite_x");
             sprite_y = request.getParameter("sprite_y");
             if (sprite_x != null) {
@@ -56,7 +54,6 @@ public class AddLinkModifier extends HttpServlet {
             utils = new AppUtilsCreator();
             utils.insertLINK(image, link_image);
             request.getSession().setAttribute("image", image);
-            //getServletContext().setAttribute("image", image);
 
             try (PrintWriter out = response.getWriter()) {
                 out.println("<!DOCTYPE html>");

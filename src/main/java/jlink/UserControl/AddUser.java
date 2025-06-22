@@ -69,8 +69,6 @@ public class AddUser extends HttpServlet {
 
                     request.getSession().setAttribute("username", username);
                     request.getSession().setAttribute("role", "user");
-                    // getServletContext().setAttribute("username", username);
-                    // getServletContext().setAttribute("role", "user");
                     rd.include(request, response);
                 }else{
                     throw new SQLException("The insertion failed");

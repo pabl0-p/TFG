@@ -63,8 +63,6 @@ public class Viewer extends HttpServlet {
             image.setIsMain(true);
             String user = (String) request.getSession().getAttribute("username");
             String role = (String) request.getSession().getAttribute("role");
-            // String user = (String) getServletContext().getAttribute("username");
-            // String role = (String) getServletContext().getAttribute("role");
             utils.setJLINKImage(image, file_name, user, role);
 
             sql = "select * from image where filename like ?";
