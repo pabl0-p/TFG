@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>wv004_notebutton_off</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="wv004_notebutton_off">
+            <g id="notebutton-copy">
+                <g transform="translate(12.000000, 12.000000)">
+                    <path d="M0,11.1978439 C0,5.01344549 5.01890941,0 11.1978439,0 L44.8021561,0 C50.9865545,0 56,5.01890941 56,11.1978439 L56,44.8021561 C56,50.9865545 50.9810906,56 44.8021561,56 L11.1978439,56 C5.01344549,56 0,50.9810906 0,44.8021561 L0,11.1978439 Z" id="gray-box" fill-opacity="1" fill="#ADFF2F"></path>
+                    <path d="M8,40 L30,40 L30,44 L8,44 L8,40 Z M8,26 L48,26 L48,30 L8,30 L8,26 Z M8,12 L48,12 L48,16 L8,16 L8,12 Z" id="Shape" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

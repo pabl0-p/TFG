@@ -1,0 +1,27 @@
+<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    PolicyId="urn:isdcm:policyid:1"
+    RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:first-applicable"  
+    Version="1.0"  
+    xsi:schemaLocation="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17  
+    http://docs.oasis-open.org/xacml/3.0/xacml-core-v3-schema-wd-17.xsd">
+    <Description>Access rules</Description>
+    {{USERNAME}}
+    <Rule Effect="Permit" RuleId="urn:oasis:names:tc:xacml:3.0:permit-image-view">
+        <Target>
+            <AnyOf>
+                {{VIEW_BLOCK}}
+            </AnyOf>
+        </Target>
+    </Rule>
+    <Rule Effect="Permit" RuleId="urn:oasis:names:tc:xacml:3.0:permit-image-edit">
+        <Target>
+            <AnyOf>
+                {{EDIT_BLOCK}}
+            </AnyOf>
+        </Target>
+    </Rule>
+    <Rule Effect="Deny" RuleId="urn:oasis:names:tc:xacml:3.0:final-rule">
+    </Rule>
+</Policy>
+
