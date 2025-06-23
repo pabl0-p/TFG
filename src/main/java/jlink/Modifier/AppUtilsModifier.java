@@ -695,15 +695,15 @@ public class AppUtilsModifier {
                     image.setEditAccess(null);
                 }
             }
-
-            image.setChange(change);
-            AppUtilsModifier.setProtection(image, filePart, image.getAppPath(), request);
     
             if (!old_title.equals(title)) {
                 renameFile(old_title, title, image.getAppPath());
                 renameFile(old_title + "_original", title + "_original", image.getAppPath());
                 renameFile(old_title + "_replacement", title + "_replacement", image.getAppPath());
             }
+
+            image.setChange(change);
+            AppUtilsModifier.setProtection(image, filePart, image.getAppPath(), request);
         }
     }
 }
