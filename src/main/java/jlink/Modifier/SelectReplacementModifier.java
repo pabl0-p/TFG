@@ -194,7 +194,7 @@ public class SelectReplacementModifier extends HttpServlet {
                             "                </form>\n" +
                             "                </div>\n" +
                             "                <div class=\"column\">\n" +
-                            "                        <img class=\"pre-img\" id=\"pre-img\" src=\"#\"/>\n" +
+                            "                        <img class=\"bigimage\" id=\"pre-img\" src=\"#\"/>\n" +
                             "                </div>\n" +
                             "            </div>\n" +
                             "        </div>");

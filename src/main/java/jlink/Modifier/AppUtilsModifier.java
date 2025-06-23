@@ -8,39 +8,28 @@ import jlink.Common.AppUtilsCommon;
 import jlink.Config.JumbfConfig;
 import jlink.Const.AppConst;
 import jlink.Const.JLINKConst;
-import jlink.Const.MetaConst;
 import jlink.JLINKBuilder.BuilderWeb;
 import jlink.JLINKImage.JLINKImage;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.security.SecureRandom;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.awt.Graphics2D;
 
-import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.imageio.ImageIO;
 
-import org.apache.commons.lang3.StringUtils;
 import org.mipams.jumbf.entities.BinaryDataBox;
 import org.mipams.jumbf.entities.BmffBox;
 import org.mipams.jumbf.entities.ContiguousCodestreamBox;
@@ -50,7 +39,6 @@ import org.mipams.jumbf.services.CoreGeneratorService;
 import org.mipams.jumbf.services.CoreParserService;
 import org.mipams.jumbf.services.JpegCodestreamGenerator;
 import org.mipams.jumbf.services.JpegCodestreamParser;
-import org.mipams.jumbf.services.boxes.JumbfBoxService;
 import org.mipams.jumbf.services.content_types.ContiguousCodestreamContentType;
 import org.mipams.jumbf.services.content_types.XmlContentType;
 import org.mipams.jumbf.util.MipamsException;
@@ -66,8 +54,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
 
-import jlink.Viewer.AppUtilsViewer;
-
 /**
  *
  * @author Victor Ojeda and Pablo Pascual
@@ -80,8 +66,10 @@ public class AppUtilsModifier {
     private int cont_sprite;
     private JLINKImage scene;
     public Boolean decyrptionPossible = true;
+    private JLINKImage image;
     private SecretKeySpec secretKey = null;
     private IvParameterSpec ivSpec = null;
+    private Boolean encryption = false;
 
     public AppUtilsModifier() {
         images = new HashMap<>();
@@ -399,6 +387,17 @@ public class AppUtilsModifier {
         }
     }
 
+    private void checkEncryption(JLINKImage image){
+        if (image.getEncryption() != null) {
+            this.encryption = true;
+            this.image = image;
+        }
+
+        for (JLINKImage aux : image.getLinked_images()) {
+            this.checkEncryption(aux);
+        }
+    }
+
     public void createFile(JLINKImage image, String merge_file, String user) throws Exception {
 
         this.setMetadataParam(image);
@@ -406,8 +405,10 @@ public class AppUtilsModifier {
         cont_sprite = 0;
         this.builder(image, true, null, user);
         String path = this.mergeFile(image, merge_file);
-        if (image.getEncryption() != null) {
-            AppUtilsCommon.saveKey(path, image);
+
+        this.checkEncryption(image);
+        if (this.encryption) {
+            AppUtilsCommon.saveKey(path, this.image);
         }
     }
 
@@ -497,7 +498,6 @@ public class AppUtilsModifier {
         String cleanOriginalName = image.getTitle().replace(" ", "_") + "_original.jpeg";
         String cleanReplacementName = image.getTitle().replace(" ", "_") + "_replacement.jpeg";
 
-        System.out.println(imName);
         BufferedImage im = ImageIO.read(new File(basePath + imName));
         if (im != null) {
             ImageIO.write(im, "jpeg", new File(basePath + cleanName));
@@ -651,13 +651,13 @@ public class AppUtilsModifier {
     }
 
     public void modifySceneInformation(JLINKImage image, String label, String title, String description,
-            String duration, String sprite_color, HttpServletRequest request, Part filePart) throws FileNotFoundException, IOException, Exception {
+            String duration, String sprite_color, HttpServletRequest request, Part filePart, String encryption, String replacement, String[] view_access, String[] edit_access, Boolean change) throws FileNotFoundException, IOException, Exception {
 
         String old_title, old_version;
         char v;
 
         for (JLINKImage aux : image.getLinked_images()) {
-            this.modifySceneInformation(aux, label, title, description, duration, sprite_color, request, filePart);
+            this.modifySceneInformation(aux, label, title, description, duration, sprite_color, request, filePart, encryption, replacement, view_access, edit_access, change);
         }
         if (image.getTitle().equals(label)) {
             old_title = image.getTitle();
@@ -669,6 +669,35 @@ public class AppUtilsModifier {
             v = old_version.charAt(0);
             v++;
             image.setVersion(v + ".0.0");
+
+            if(change){
+                if(replacement != null && !replacement.isEmpty()){
+                    image.setReplacement(replacement);
+                }else {
+                    image.setReplacement(null);
+                }
+            
+                if(encryption != null && !encryption.isEmpty()){
+                    image.setEncryption(encryption);
+                }else {
+                    image.setEncryption(null);
+                }
+                
+                if(view_access != null){
+                    image.setViewAccess(view_access);
+                }else {
+                    image.setViewAccess(null);
+                }
+
+                if(edit_access != null){
+                    image.setEditAccess(edit_access);
+                }else {
+                    image.setEditAccess(null);
+                }
+            }
+
+            image.setChange(change);
+            AppUtilsModifier.setProtection(image, filePart, image.getAppPath(), request);
     
             if (!old_title.equals(title)) {
                 renameFile(old_title, title, image.getAppPath());

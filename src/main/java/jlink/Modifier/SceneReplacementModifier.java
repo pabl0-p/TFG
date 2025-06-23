@@ -66,67 +66,44 @@ public class SceneReplacementModifier extends HttpServlet {
             edit_access = request.getParameterValues("edit");
             
             String changeString = request.getParameter("change");
-            if("Yes".equals(changeString)) {
-                    String i = null;
-                    if (img.getReplacement() != null && img.getReplacement().equals("roi")) {
-                        i = "_original";
-                    } else {
-                        i = "";
-                    }
-                    String basePath = image.getAppPath() + File.separator + AppConst.MODIFIER_DIR + File.separator;
-                    String getPath = basePath + image.getTitle() + i + ".jpeg";
-                    String savePath = null;
-
-                    if (replacement != null && replacement.equals("roi")) {
-                        savePath = basePath+ image.getTitle() + "_original.jpeg";
-                    } else {
-                        savePath = basePath + image.getTitle() + ".jpeg";
-                    }
-
-                    System.out.println(getPath);
-                    System.out.println(savePath);
-                    if (!getPath.equals(savePath)) {
-                        BufferedImage im = ImageIO.read(new File(getPath));
-                        ImageIO.write(im, "jpeg", new File(savePath));
-                    }
-                }
 
             if("Yes".equals(changeString)) {
                 change = true;
-                if(replacement != null && !replacement.isEmpty()){
-                    img.setReplacement(replacement);
-                }else {
-                    img.setReplacement(null);
+                String i = null;
+                if (img.getReplacement() != null && img.getReplacement().equals("roi")) {
+                    i = "_original";
+                } else {
+                    i = "";
+                }
+                String basePath = img.getAppPath() + File.separator + AppConst.MODIFIER_DIR + File.separator;
+                String getPath = basePath + img.getTitle() + i + ".jpeg";
+                String savePath = null;
+
+                if (replacement != null && replacement.equals("roi")) {
+                    savePath = basePath+ img.getTitle() + "_original.jpeg";
+                } else {
+                    savePath = basePath + img.getTitle() + ".jpeg";
                 }
 
-                if(encryption != null && !encryption.isEmpty()){
-                    img.setEncryption(encryption);
-                    
-                    if(view_access != null){
-                        img.setViewAccess(view_access);
-                    }else {
-                        img.setViewAccess(null);
-                    }
-                    if(edit_access != null){
-                        img.setViewAccess(edit_access);
-                    }else {
-                        img.setViewAccess(null);
-                    }
-                }else {
-                    img.setEncryption(null);
+                if (!getPath.equals(savePath)) {
+                    BufferedImage im = ImageIO.read(new File(getPath));
+                    ImageIO.write(im, "jpeg", new File(savePath));
                 }
-
-                
             }
-
-            img.setChange(change);
-
+            
             HttpSession s = request.getSession();
             s.setAttribute("scene", scene);
             s.setAttribute("title", title);
             s.setAttribute("description", description);
             s.setAttribute("duration", duration);
             s.setAttribute("sprite_color", sprite_color);
+
+            s.setAttribute("replacement", replacement);
+            s.setAttribute("encryption", encryption);
+            s.setAttribute("view_access", view_access);
+            s.setAttribute("edit_access", edit_access);
+            s.setAttribute("change", change);
+            
             
             try (PrintWriter out = response.getWriter()) {
                 if(replacement.equals("roi") && change){

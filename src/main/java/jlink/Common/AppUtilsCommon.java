@@ -317,14 +317,13 @@ public class AppUtilsCommon {
             String request = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
             request = request.replace("{{USERNAME}}", this.user).replace("{{ROLE}}", this.role).replace("{{ACTION}}", action);
             PDP pdp = new PDP();
-            System.out.println(policy);
-            System.out.println(request);
+
             String effect = pdp.decide(policy, request);
             if(effect.equals("Permit")){
                 access = true;
             }
             
-            if (!access && constDir.equals(AppConst.MODIFIER_DIR)) {
+            if (constDir.equals(AppConst.MODIFIER_DIR)) {
                 Files.writeString(Path.of(image.getAppPath() + File.separator + constDir + File.separator + "xacml_policy.txt"), policy);
             }
         } else {

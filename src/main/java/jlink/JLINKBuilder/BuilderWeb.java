@@ -367,7 +367,6 @@ public class BuilderWeb {
             ProtectionDescriptionBox protectionDescriptionBox = new ProtectionDescriptionBox();
             SecretKeySpec secretKey = image.getSecretKey();
             IvParameterSpec ivSpec = image.getIVSpec();
-            System.out.println(ivSpec);
 
             if (encryption.equals("AES256")){
                 protectionDescriptionBox.setAes256CbcProtection();
@@ -385,7 +384,7 @@ public class BuilderWeb {
                 xmlBoxBuilder.setLabel("access-rules-reference");
                 XmlBox xmlBox = new XmlBox();
 
-                if(dir.equals(AppConst.MODIFIER_DIR) && !image.getPossibleAction()) {
+                if(dir.equals(AppConst.MODIFIER_DIR) && (!image.getPossibleAction() || !image.getChange())) {
                     rules  = Files.readString(Path.of(image.getAppPath() + File.separator + dir + File.separator + "xacml_policy.txt"));
                 } else {
                     rules = getXACMLrules(view_access, edit_access, user);
@@ -402,7 +401,6 @@ public class BuilderWeb {
             if(replacementBox == null){
                 
                 protectionBoxBuilder.setLabel(image.getLabel());
-                System.out.println("The image is: " + image.getTitle() + " in" + dir);
                 saveDir = image.getAppPath() + File.separator + dir + File.separator + image.getTitle().replace(" ", "_") + ".jpeg";
                 BufferedImage original_image = ImageIO.read(new File(saveDir));
 

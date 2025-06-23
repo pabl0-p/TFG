@@ -61,8 +61,10 @@ public class AppUtilsCreator {
     private int JLINK_box_id;
     private int cont_scene;
     private int cont_sprite;
+    private JLINKImage image;
     private SecretKeySpec secretKey;
     private IvParameterSpec ivSpec;
+    private Boolean encryption = false;
 
     public AppUtilsCreator() {
         images = new HashMap<>();
@@ -190,6 +192,18 @@ public class AppUtilsCreator {
         }
     }
 
+    private void checkEncryption(JLINKImage image){
+        if (image.getEncryption() != null) {
+            this.encryption = true;
+            this.image = image;
+            return;
+        }
+
+        for (JLINKImage aux : image.getLinked_images()) {
+            this.checkEncryption(aux);
+        }
+    }
+
     public void createFile(JLINKImage image, String merge_file, String user) throws Exception {
 
         this.setMetadataParam(image);
@@ -197,8 +211,10 @@ public class AppUtilsCreator {
         cont_sprite = 0;
         this.builder(image, true, null, user);
         String path = this.mergeFile(image, merge_file);
-        if (image.getEncryption() != null) {
-            AppUtilsCommon.saveKey(path, image);
+
+        this.checkEncryption(image);
+        if (this.encryption) {
+            AppUtilsCommon.saveKey(path, this.image);
         }
     }
 

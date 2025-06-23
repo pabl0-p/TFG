@@ -43,20 +43,29 @@ public class ApplySceneModificator extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         JLINKImage image;
-        String scene, title, description, duration, sprite_color;
+        String scene, title, description, duration, sprite_color, encryption, replacement;
+        String[] view_access, edit_access;
+        Boolean change;
         AppUtilsModifier utils;
         RequestDispatcher rd;
         Part filePart = null;
 
         try {
-            image = (JLINKImage) request.getSession().getAttribute("image");
 
             HttpSession s = request.getSession();
+            image = (JLINKImage) request.getSession().getAttribute("image");
+
             scene = (String) s.getAttribute("scene");
             title = (String) s.getAttribute("title");
             description = (String) s.getAttribute("description");
             duration = (String) s.getAttribute("duration");
             sprite_color = (String) s.getAttribute("sprite_color");
+
+            encryption = (String) s.getAttribute("encryption");
+            replacement = (String) s.getAttribute("replacement");
+            view_access = (String[]) s.getAttribute("view_access");
+            edit_access = (String[]) s.getAttribute("edit_access");
+            change = (Boolean) s.getAttribute("change");
 
             switch (sprite_color) {
                 case "Green":
@@ -71,19 +80,13 @@ public class ApplySceneModificator extends HttpServlet {
             }
 
             utils = new AppUtilsModifier();
-            utils.getSceneByLabel(image, scene);
-            JLINKImage img = utils.getScene();
-
-            if (img.getReplacement() != null && img.getChange()) {
+            if ((replacement != null && !replacement.isEmpty()) && change) {
                 filePart = request.getPart("image");
             }
 
-            AppUtilsModifier.setProtection(img, filePart, image.getAppPath(), request);
-
-            utils.modifySceneInformation(image, scene, title, description, duration, sprite_color, request, filePart);
+            utils.modifySceneInformation(image, scene, title, description, duration, sprite_color, request, filePart, encryption, replacement, view_access, edit_access, change);
 
             request.getSession().setAttribute("image", image);
-            //getServletContext().setAttribute("image", image);
 
             try (PrintWriter out = response.getWriter()) {
                 out.println("<!DOCTYPE html>");

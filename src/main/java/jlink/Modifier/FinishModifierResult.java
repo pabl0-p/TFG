@@ -124,7 +124,7 @@ public class FinishModifierResult extends HttpServlet {
                             "                            <th>Replacement Method</th>\n" +
                             "                            <th>Access Rules</th>\n" +
                             "                        </tr>\n");
-                    utils.containsTable(out, image);
+                    containsTable(out, image);
                     out.println("</table>\n" +
                             "                    <p>The file has been saved in the application database. If you want to download the file press the download button.</p>\n"
                             +
@@ -149,8 +149,6 @@ public class FinishModifierResult extends HttpServlet {
                             "        </div>");
                     out.println("<script type=\"text/javascript\" src=\"" + AppConst.JS_FINISH_RESULT_PATH
                             + "\"></script>");
-                    out.println("<script type=\"text/javascript\" src=\"" + AppConst.JS_CONTAIN_TABLE_MODIFIER_PATH
-                        + "\"></script>");
                     out.println("</body>");
                     out.println("</html>");
                 }
@@ -175,6 +173,59 @@ public class FinishModifierResult extends HttpServlet {
                 rd.forward(request, response);
                 out.println("</html>");
             }
+        }
+    }
+
+
+    public void containsTable(PrintWriter out, JLINKImage image) {
+        // String extraImg = "";
+        String rowStyle = "";
+
+        Boolean possible = image.getPossibleAction();
+        String saveDir = AppConst.MODIFIER_DIR + File.separator + image.getTitle() + ".jpeg";
+
+        if (!possible){
+            rowStyle = " style='background-color:#828282 !important;'";
+            saveDir = AppConst.MODIFIER_DIR + File.separator + image.getTitle() + "_original.jpeg";
+        } 
+
+        out.println("<tr onmouseover=\"showImg(this, " + possible + ")\" onmouseout=\"hideImg(this, "+ possible + ")\" data-value=\""
+                + saveDir + "\" " 
+                + rowStyle + ">");
+        out.println("<td>" + image.getTitle() + "</td>");
+        out.println("<td>" + image.getNote() + "</td>");
+
+        if (image.isIsMain()) {
+            out.println("<td>-</td>");
+        } else {
+            if (image.getPrevious_image() != null) {
+                out.println("<td>" + image.getPrevious_image().replace("_", " ") + "</td>");
+            }
+        }
+        if (image.getEncryption() != null && image.getEncryption().equals("AES256")) {
+            out.println("<td>AES 256</td>");
+        } else if (image.getEncryption() != null && image.getEncryption().equals("AES256IV")) {
+            out.println("<td>AES 256 with IV</td>");
+        } else {
+            out.println("<td>Not Used</td>");
+        }
+
+         if (image.getReplacement() != null && image.getReplacement().equals("roi")) {
+            out.println("<td>ROI</td>");
+        } else if (image.getReplacement() != null && image.getReplacement().equals("replace_img")) {
+            out.println("<td>Replacement Image</td>");
+        } else {
+            out.println("<td>Not Used</td>");
+        }
+
+        if (image.getViewAccess() != null) {
+            out.println("<td>Used</td></tr>");
+        } else {
+            out.println("<td>Not Used</td></tr>");
+        }
+
+        for (JLINKImage aux : image.getLinked_images()) {
+            this.containsTable(out, aux);
         }
     }
 
