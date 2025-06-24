@@ -1,3 +1,7 @@
+<%-- 
+    Document   : viewerList
+    Author     : Victor Ojeda and Pablo Pascual
+--%>    
     <%@page import="java.io.File" %>
         <%@page import="java.sql.DriverManager" %>
             <%@page import="java.sql.ResultSet" %>

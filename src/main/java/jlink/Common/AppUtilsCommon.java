@@ -59,6 +59,11 @@ import java.security.SecureRandom;
 
 import java.nio.file.Path;
 
+/*
+ * 
+ * @author Pablo Pascual
+ */
+
 public class AppUtilsCommon {
     public SecretKeySpec secretKey;
     public String user, role;

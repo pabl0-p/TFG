@@ -1,4 +1,7 @@
-<%-- Document : downloadList Created on : 02-jun-2022, 22:25:50 Author : Victor Ojeda and Pablo Pascual --%>
+<%-- 
+    Document   : deleteList
+    Author     : Victor Ojeda and Pablo Pascual
+--%>
 
     <%@page import="java.io.File" %>
         <%@page import="java.sql.DriverManager" %>

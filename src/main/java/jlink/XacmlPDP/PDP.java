@@ -5,6 +5,11 @@ import org.xml.sax.InputSource;
 import javax.xml.parsers.*;
 import java.io.StringReader;
 
+/*
+ * 
+ * @author Pablo Pascual
+ */
+
 public class PDP {
     public Document parsefromString(String xacml) throws Exception{
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

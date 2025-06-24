@@ -1,4 +1,7 @@
-<%-- Document : modifierList Created on : 26-abr-2022, 18:19:35 Author : Victor Ojeda and Pablo Pascual--%>
+<%-- 
+    Document   : modifierList
+    Author     : Victor Ojeda and Pablo Pascual
+--%>
 
     <%@page import="java.io.File" %>
         <%@page import="java.sql.DriverManager" %>

@@ -66,8 +66,6 @@ public class CheckUser extends HttpServlet {
                 if(matches){
                     request.getSession().setAttribute("username", username);
                     request.getSession().setAttribute("role", role);
-                    // getServletContext().setAttribute("username", username);
-                    // getServletContext().setAttribute("role", role);
                     rd = request.getRequestDispatcher("/menu.jsp");
                     rd.include(request, response);
                 }else{

@@ -1,3 +1,8 @@
+<%-- 
+    Document   : deleteList
+    Author     : Victor Ojeda and Pablo Pascual
+--%>
+
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>

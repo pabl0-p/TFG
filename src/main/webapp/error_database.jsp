@@ -1,6 +1,5 @@
 <%-- 
     Document   : error
-    Created on : 31-may-2022, 15:26:12
     Author     : Victor Ojeda and Pablo Pascual
 --%>
 

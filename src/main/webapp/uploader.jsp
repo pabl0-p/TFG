@@ -1,4 +1,7 @@
-<%-- Document : uploader Created on : 22-may-2022, 13:49:28 Author : Victor Ojeda and Pablo Pascual --%>
+<%-- 
+    Document   : uploader
+    Author     : Victor Ojeda and Pablo Pascual
+--%>
 
     <%@page contentType="text/html" pageEncoding="UTF-8" %>
         <!DOCTYPE html>

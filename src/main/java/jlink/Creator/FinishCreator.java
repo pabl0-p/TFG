@@ -58,7 +58,6 @@ public class FinishCreator extends HttpServlet {
             utils = new AppUtilsCreator();
             utils.insertLINK(image, link_image);
             request.getSession().setAttribute("image", image);
-            //getServletContext().setAttribute("image", image);
 
             try (PrintWriter out = response.getWriter()) {
                 out.println("<!DOCTYPE html>");

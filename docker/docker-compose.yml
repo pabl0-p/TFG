@@ -1,19 +1,19 @@
-version: '3'
-services:
-  jlink-app:
-    image: jlink-app:latest
-    ports:
-      - 8083:8080
-    environment:
-      # org_mipams_core_image_folder: "/usr/local/tomcat/webapps/jlink/viewer"
-      # org_mipams_core_max_file_size_in_bytes: 52428800
-      org_mipams_core: "INFO" 
-  psql-server:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: JLINK_APP
-    volumes:
-      - ../src/main/resources/scripts:/docker-entrypoint-initdb.d/
+# version: '3'
+# services:
+#   jlink-app:
+#     image: jlink-app:latest
+#     ports:
+#       - 8083:8080
+#     environment:
+#       # org_mipams_core_image_folder: "/usr/local/tomcat/webapps/jlink/viewer"
+#       # org_mipams_core_max_file_size_in_bytes: 52428800
+#       org_mipams_core: "INFO" 
+#   psql-server:
+#     image: postgres
+#     restart: always
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#       POSTGRES_DB: JLINK_APP
+#     volumes:
+#       - ../src/main/resources/scripts:/docker-entrypoint-initdb.d/
