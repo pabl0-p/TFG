@@ -391,6 +391,7 @@ public class AppUtilsModifier {
         if (image.getEncryption() != null) {
             this.encryption = true;
             this.image = image;
+            return;
         }
 
         for (JLINKImage aux : image.getLinked_images()) {
